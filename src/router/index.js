@@ -1,6 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import Posts from "@/views/posts/Posts.vue";
+import NotFound from "@/views/posts/NotFound.vue";
+import PostDetail from "@/views/posts/PostDetail.vue";
 
 Vue.use(VueRouter);
 
@@ -18,6 +21,27 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+  },
+  {
+    path: "/posts",
+    name: "posts",
+    component: Posts,
+  },
+  {
+    path: "/posts/:id",
+    name: "postdetail",
+    component: PostDetail,
+  },
+  // redirect
+  {
+    path: "/all-posts",
+    redirect: "posts",
+  },
+  // catchall 404
+  {
+    path: "/:catchall(.*)",
+    name: "NotFound",
+    component: NotFound,
   },
 ];
 
