@@ -101,13 +101,13 @@ export default {
     },
     handleOk(bvModalEvent) {
       if (!this.posts.id || !this.posts.title || !this.posts.body) {
+        // Prevent modal from closing
         bvModalEvent.preventDefault();
-        // Trigger submit handler
         this.handleSubmit();
         return;
       }
+      // Trigger submit handler
       this.addPost(this.posts);
-      // Prevent modal from closing
     },
     handleSubmit() {
       // Exit when the form isn't valid

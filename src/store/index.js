@@ -12,11 +12,6 @@ export default new Vuex.Store({
   mutations: {
     DELETE_POST(state, postId) {
       state.posts = state.posts.filter((post) => post.id !== postId);
-      if (state === 200) {
-        alert("Xoa thang cong");
-      } else {
-        alert("xoa that bai");
-      }
     },
     ADD_POST(state, newPost) {
       state.posts.unshift(newPost);
