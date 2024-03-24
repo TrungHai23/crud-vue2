@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Posts from "@/views/posts/Posts.vue";
 import NotFound from "@/views/posts/NotFound.vue";
-import PostDetail from "@/views/posts/PostDetail.vue";
+import PostDetail from "@/views/posts/PostEdit.vue";
 
 Vue.use(VueRouter);
 

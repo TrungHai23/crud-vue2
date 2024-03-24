@@ -13,15 +13,22 @@
       </thead>
       <tbody>
         <tr v-for="post in posts" :key="post.id">
-          <th>{{ post.id }}</th>
-          <th>{{ post.title }}</th>
-          <th>{{ post.body }}</th>
-          <th>
+          <td>{{ post.id }}</td>
+          <td>{{ post.title }}</td>
+          <td>{{ post.body }}</td>
+          <td>
             <router-link :to="{ name: 'postdetail', params: { id: post.id } }">
-              <button>Edit</button></router-link
+              <b-button variant="outline-info" class="btn btn-actions"
+                >Edit</b-button
+              >
+            </router-link>
+            <b-button
+              variant="outline-danger"
+              @click="deletePost(post.id)"
+              class="btn btn-actions"
+              >Delete</b-button
             >
-            <button @click="deletePost(post.id)">Delete</button>
-          </th>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -31,6 +38,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import AddPost from "@/components/AddPost.vue";
+
 export default {
   mounted() {
     this.getPosts();
@@ -47,4 +55,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.btn {
+  width: 80px;
+  margin: 2px 0;
+}
+</style>

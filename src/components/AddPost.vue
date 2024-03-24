@@ -1,11 +1,18 @@
 <template>
   <div>
-    <b-button v-b-modal.modal-prevent-closing>Add</b-button>
+    <b-button
+      v-b-modal.modal-prevent-closing
+      class="btn btn-add"
+      variant="outline-success"
+      @click="modalShow = !modalShow"
+      >Add</b-button
+    >
 
     <b-modal
       id="modal-prevent-closing"
       ref="modal"
       title="Submit Your Name"
+      v-model="modalShow"
       @show="resetModal"
       @hidden="resetModal"
       @ok="handleOk"
@@ -62,9 +69,17 @@ export default {
         title: "",
         body: "",
       },
+      modalShow: false,
       nameState: null,
       submittedNames: [],
     };
+  },
+  watch: {
+    modalShow(newValue) {
+      if (newValue) {
+        this.resetForm();
+      }
+    },
   },
   methods: {
     ...mapActions(["addPost"]),
@@ -85,12 +100,14 @@ export default {
       };
     },
     handleOk(bvModalEvent) {
+      if (!this.posts.id || !this.posts.title || !this.posts.body) {
+        bvModalEvent.preventDefault();
+        // Trigger submit handler
+        this.handleSubmit();
+        return;
+      }
       this.addPost(this.posts);
-      this.resetForm();
       // Prevent modal from closing
-      bvModalEvent.preventDefault();
-      // Trigger submit handler
-      this.handleSubmit();
     },
     handleSubmit() {
       // Exit when the form isn't valid

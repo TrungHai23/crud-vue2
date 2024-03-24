@@ -11,32 +11,24 @@ export default new Vuex.Store({
   getters: {},
   mutations: {
     DELETE_POST(state, postId) {
-      if ((state.posts = state.posts.filter((post) => post.id !== postId))) {
-        alert("Xóa thành công");
+      state.posts = state.posts.filter((post) => post.id !== postId);
+      if (state === 200) {
+        alert("Xoa thang cong");
       } else {
-        alert("Xóa thất bại");
+        alert("xoa that bai");
       }
     },
     ADD_POST(state, newPost) {
-      if (state.posts.unshift(newPost)) {
-        alert("Thêm thành công");
-      } else {
-        alert("Thêm thất bại");
-      }
+      state.posts.unshift(newPost);
     },
     GET_POST(state, posts) {
       state.posts = posts;
     },
     EDIT_POST(state, editedPost) {
-      state.posts = state.posts.map((post) => {
-        if (post.id === editedPost.id) {
-          alert("Sửa thành công");
-          return editedPost;
-        } else {
-          return post;
-        }
-      });
-      // state.posts = editedPost;
+      const index = state.posts.findIndex((post) => post.id === editedPost.id);
+      if (index !== -1) {
+        state.posts.splice(index, 1, editedPost);
+      }
     },
   },
   actions: {
